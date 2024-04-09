@@ -1,0 +1,19 @@
+const Web3 = require('web3');
+const contractABI = []; // 合约 ABI
+const contractAddress = '0xContractAddress'; // 智能合约地址
+
+// 初始化 Web3 对象
+const web3 = new Web3('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID');
+
+// 创建智能合约实例
+const contractInstance = new web3.eth.Contract(contractABI, contractAddress);
+
+// 调用 mint 函数
+const recipientAddress = '0xRecipientAddress'; // 接收地址
+contractInstance.methods.mint(recipientAddress).send({ from: '0xYourOwnerAddress' })
+  .then(receipt => {
+    console.log('Transaction receipt:', receipt);
+  })
+  .catch(error => {
+    console.error('Error occurred:', error);
+  });
